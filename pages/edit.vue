@@ -65,7 +65,7 @@ export default {
       img: [],
       files: [],
       upload_config: {
-        url: window.heishiConfig.baseUrl + '/upload',
+        url: window.heishiConfig.baseUrl + 'upload',
         auto: true,
         max_files: 8,
         size: 1024 * 1024 * 10,
