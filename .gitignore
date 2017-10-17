@@ -13,4 +13,8 @@ dist
 .DS_Store
 static/api.config.js
 yarn.lock
-
+dry_running.sh
+exclude.txt
+rsync_running.log
+rsyncd.secrets
+update_source.sh
