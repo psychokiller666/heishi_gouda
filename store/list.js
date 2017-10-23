@@ -8,7 +8,7 @@ export const state = () => ({
 
 export const mutations = {
   SET_LIST: (state, action) => {
-    state.list = state.list.concat(state.list)
+    state.list = state.list.concat(action.data.list)
     state.cur_page = action.data.cur_page
     state.total_page = action.data.total_page
   },
