@@ -4,7 +4,7 @@
       <nuxt-link to="/" class="win95-button back">返回</nuxt-link>
     </div>
     <hr class="win95-hr" />
-    <ul class="items" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading">
+    <ul class="items" v-infinite-scroll="loadMore">
       <li class="item" v-for="item in items">
         <nuxt-link :to="{ name : '/show', params: { id: item.user_id }}" class="userinfo">
           <div class="avatar" v-lazy:background-image="item.weixin_headimg+`/96`"></div>
