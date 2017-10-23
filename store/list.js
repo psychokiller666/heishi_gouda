@@ -8,7 +8,9 @@ export const state = () => ({
 
 export const mutations = {
   SET_LIST: (state, action) => {
-    state = action.data
+    state.list = state.list.concat(state.list)
+    state.cur_page = action.data.cur_page
+    state.total_page = action.data.total_page
   },
   UPDATE_ITEMS: (state, action) => {
     state.list.forEach(function (item) {
@@ -21,6 +23,8 @@ export const mutations = {
 
 export const actions = {
   async REQ_LIST ({ state, commit }, page) {
+    if (state.cur_page > state.total_page) return false
+
     const res = await axios.post('belikedlist', {
       openid: this.getters['GET_OPENID'],
       page: page,

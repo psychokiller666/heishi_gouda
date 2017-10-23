@@ -22,6 +22,9 @@
 </template>
 <script>
 export default {
+  asyncData ({ store }) {
+    return store.dispatch('list/REQ_LIST', 1)
+  },
   middleware: 'auth',
   computed: {
     items () {
