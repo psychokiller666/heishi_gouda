@@ -22,7 +22,6 @@ export const actions = {
 
   },
   async REQ_WECHAT_LOGIN ({ commit }, code) {
-    // console.log('dfsdf', axios)
     const res = await axios.post('login', {
       code: code
     })
