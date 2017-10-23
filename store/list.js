@@ -8,7 +8,7 @@ export const state = () => ({
 
 export const mutations = {
   SET_LIST: (state, action) => {
-    state = action.data.data
+    state = action.data
   },
   UPDATE_ITEMS: (state, action) => {
     state.list.forEach(function (item) {
