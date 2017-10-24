@@ -1,7 +1,7 @@
 <template>
   <section class="show">
     <div class="win95-features">
-      <nuxt-link to="/" class="win95-button back">返回</nuxt-link>
+      <button class="win95-button back" @!click="back">返回</button>
     </div>
     <hr class="win95-hr" />
     <div class="image_cover"  v-lazy:background-image="user.cover + `?x-oss-process=image/resize,h_360`"></div>
@@ -45,7 +45,16 @@ export default {
       })
     }
   },
-  middleware: 'auth'
+  middleware: 'auth',
+  methods: {
+    back () {
+      if (window.history.length === 1) {
+        this.$router.push('/')
+      } else {
+        window.history.back()
+      }
+    }
+  }
 }
 </script>
 
