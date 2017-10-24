@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { MessageBox } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 
 export default {
   asyncData ({ store }) {
@@ -47,7 +47,8 @@ export default {
   data () {
     return {
       isSubmit: false,
-      status: false
+      status: false,
+      has_liked_someone: null
     }
   },
   computed: {
@@ -70,10 +71,15 @@ export default {
     this.$store.dispatch('home/REQ_USERINFO').then(res => {
       this.status = res.data.status
       this.isSubmit = res.data.img_list.length
+      this.has_liked_someone = res.data.has_liked_someone
     })
   },
   methods: {
     submitLike () {
+      if (this.has_liked_someone === 0) {
+        Toast('好了，ta知道你点赞了，你在<列表>里可以查看互相点赞的人')
+        this.has_liked_someone = 1
+      }
       if (this.isSubmit) {
         this.$store.dispatch('home/REQ_LIKE')
       } else {
