@@ -2,6 +2,7 @@ import axios from '~/plugins/axios'
 
 export const state = () => ({
   loading: false,
+  ismore: true,
   cur_page: null,
   list: [],
   total_page: null
@@ -27,8 +28,8 @@ export const mutations = {
 
 export const actions = {
   async REQ_LIST ({ state, commit }, page) {
-    if (state.cur_page > state.total_page) {
-      console.log('dff')
+    if (state.cur_page >= state.total_page) {
+      commit('SET_LOADING', false)
     } else {
       commit('SET_LOADING', true)
       const res = await axios.post('belikedlist', {
