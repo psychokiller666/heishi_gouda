@@ -11,14 +11,10 @@ export const state = () => ({
 
 export const mutations = {
   SET_LIST: (state, action) => {
-    if (action.data.list.length) {
-      state.list = state.list.concat(action.data.list)
-      state.cur_page = action.data.cur_page
-      state.total_page = action.data.total_page
-      state.next_page = action.data.cur_page + 1
-    } else {
-      state.ismore = false
-    }
+    state.list = state.list.concat(action.data.list)
+    state.cur_page = action.data.cur_page
+    state.total_page = action.data.total_page
+    state.next_page = state.next_page + 1
   },
   UPDATE_ITEMS: (state, action) => {
     state.list.forEach(function (item) {
@@ -29,6 +25,9 @@ export const mutations = {
   },
   SET_LOADING: (state, action) => {
     state.loading = action
+  },
+  SET_ISMORE: (state, action) => {
+    state.ismore = action
   }
 }
 
@@ -38,11 +37,14 @@ export const actions = {
       commit('SET_LOADING', true)
       const res = await axios.post('belikedlist', {
         openid: this.getters['GET_OPENID'],
-        page: state.next_page,
+        cur_page: state.next_page,
         page_size: 20
       })
       if (res.data.code === 0) {
         commit('SET_LIST', res.data)
+        commit('SET_LOADING', false)
+      } else if (res.data.code === 3) {
+        commit('SET_ISMORE', false)
         commit('SET_LOADING', false)
       }
     }
