@@ -56,10 +56,6 @@ export default {
         })
       })
       res.data.data.img_list = temp
-      // 第一次玩
-      if (!res.data.data.nickname) {
-        Toast('想玩勾搭至少上传三张自己的高质量穿搭图，被审核姐姐拒绝了今天就没得玩了，请认真上传')
-      }
       return {
         userinfo: res.data.data
       }
@@ -146,9 +142,9 @@ export default {
       this.userinfo.cover = img.url
     },
     submit () {
-      if (!this.userinfo.img_list.length) {
+      if (this.userinfo.img_list.length < 3) {
         Toast({
-          message: '照片必须上传，不然不让玩！！！',
+          message: '想玩勾搭至少上传三张自己的高质量穿搭图，被审核姐姐拒绝了今天就没得玩了，请认真上传。',
           className: 'win95-toast'
         })
         return

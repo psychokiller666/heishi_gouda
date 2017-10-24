@@ -77,7 +77,10 @@ export default {
   methods: {
     submitLike () {
       if (this.has_liked_someone === 0) {
-        Toast('好了，ta知道你点赞了，你在<列表>里可以查看互相点赞的人')
+        Toast({
+          message: '好了，ta知道你点赞了，你在<列表>里可以查看互相点赞的人',
+          className: 'win95-toast'
+        })
         this.has_liked_someone = 1
       }
       if (this.isSubmit) {
