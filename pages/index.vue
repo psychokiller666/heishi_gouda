@@ -1,26 +1,11 @@
 <template>
   <section class="index">
-<!--     <div class="invite">
-      <div class="win95-prompt">
-        <h2>提示：</h2>
-        <p>周三 24h开放</p>
-        <h2>新版本更新：</h2>
-        <p>1、点<b>like</b>的时候响应快一些。</p>
-        <p>2、屏蔽各种敏感关键词，以及干掉露阴癖。</p>
-        <p>3、添加举报功能</p>
-        <p>4、我还没想到更好的功能，有的话，你在黑市后台留言</p>
-        <div class="win95-input">
-          <input type="text" placeholder="密码"/>
-        </div>
+    <mt-loadmore ref="loadmore" :top-method="loadTop"  v-show="status === 1">
+      <div class="win95-features">
+        <button class="win95-button like" @!click="submitLike" :disabled="buttonLoad">LIKE</button>
+        <button class="win95-button shit" @!click="submitShit" :disabled="buttonLoad">SHIT</button>
       </div>
-    </div> -->
-
-    <div class="win95-features">
-      <button class="win95-button like" @!click="submitLike" :disabled="buttonLoad">LIKE</button>
-      <button class="win95-button shit" @!click="submitShit" :disabled="buttonLoad">SHIT</button>
-    </div>
-    <hr class="win95-hr" />
-    <mt-loadmore ref="loadmore" :top-method="loadTop">
+      <hr class="win95-hr" />
       <div class="items">
         <div class="item" v-for="item in items">
           <div class="usermore">
@@ -28,7 +13,7 @@
               <div class="avatar" v-lazy:background-image="item.head_img + `/96`"></div>
               <div class="username">{{ item.nickname }}</div>
             </div>
-            <nuxt-link class="win95-button more" :to="{ name: 'show-id', params: { id: item.id } }">...</nuxt-link>
+            <nuxt-link class="win95-button more" :to="{ name: 'show-id', params: { id: item.id } }">更多照片</nuxt-link>
           </div>
           <div class="cover" v-lazy:background-image="item.cover + `?x-oss-process=image/resize,h_360`"></div>
           <div class="viewsphotonum">
@@ -42,13 +27,28 @@
         当叫嚣的鸟群飞过天际，我的血液因等待而感到疼痛。过段时间欣赏你的人将会出现这，just wait。
       </div>
     </mt-loadmore>
+    <div class="invite" v-show="status !== 1">
+      <div class="win95-prompt">
+        <h2>提示：</h2>
+        <p v-if="status == -1">审核没通过，请重新认真的编辑一次资料。<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/41328b73e08edc2f94eda41185b0e76e.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
+        <p v-if="status == 0">小姐姐正审核着呢，别着急！<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/be47599c81d6d39ead1b00be127afe07.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
+import { MessageBox } from 'mint-ui'
+
 export default {
   asyncData ({ store }) {
     return store.dispatch('home/REQ_LIST')
+  },
+  data () {
+    return {
+      isSubmit: false,
+      status: false
+    }
   },
   computed: {
     buttonLoad () {
@@ -66,12 +66,30 @@ export default {
       }
     }
   },
+  mounted () {
+    this.$store.dispatch('home/REQ_USERINFO').then(res => {
+      this.status = res.data.status
+      this.isSubmit = res.data.img_list.length
+    })
+  },
   methods: {
     submitLike () {
-      this.$store.dispatch('home/REQ_LIKE')
+      if (this.isSubmit) {
+        this.$store.dispatch('home/REQ_LIKE')
+      } else {
+        MessageBox.confirm('你必须上传照片，填了微信，才可以like或者shit别人').then(action => {
+          this.$router.push('/edit')
+        })
+      }
     },
     submitShit () {
-      this.$store.dispatch('home/REQ_SHIT')
+      if (this.isSubmit) {
+        this.$store.dispatch('home/REQ_SHIT')
+      } else {
+        MessageBox.confirm('你必须上传照片，填了微信，才可以like或者shit别人').then(action => {
+          this.$router.push('/edit')
+        })
+      }
     },
     loadTop () {
       this.$store.dispatch('home/REQ_LIST')
@@ -83,6 +101,31 @@ export default {
 
 <style lang="scss">
 .index {
+  .invite {
+    p {
+      color: red;
+    }
+    img {
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      border: 2px solid #000;
+      border-right: 4px solid #dcdcdc;
+      border-bottom: 4px solid #dcdcdc;
+      &:after {
+        content: '';
+        position: absolute;
+        border-right: 2px solid #000;
+        border-bottom: 2px solid #000;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
   .mint-loadmore {
     overflow: visible;
     .mint-loadmore-top {
@@ -126,12 +169,13 @@ export default {
         }
         .more {
           height: 32px;
-          width: 32px;
-          padding: 0;
+          // width: 32px;
+          padding: 0 6px;
           line-height: 32px;
           float: right;
           display: block;
           text-align: center;
+          // font-size: 16px;
         }
       }
       .cover {

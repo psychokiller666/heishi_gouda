@@ -106,6 +106,10 @@ html {
     .win95-input {
       display: flex;
       margin-bottom: 20px;
+      span {
+        line-height: 40px;
+        margin-right: 12px;
+      }
       &:last-child {
         margin-bottom: 0;
       }
@@ -115,14 +119,19 @@ html {
         line-height: 40px;
       }
       input {
-        height: 30px;
-        width: 80%;
-        font-size: 16px;
-        padding: 6px 12px;
-        border-top: 2px solid #7e7e7e;
-        border-left: 2px solid #7e7e7e;
-        border-right: 2px solid #e0e0e0;
-        border-bottom: 2px solid #e0e0e0;
+        &[type="text"] {
+          height: 30px;
+          width: 80%;
+          font-size: 16px;
+          padding: 6px 12px;
+          border-top: 2px solid #7e7e7e;
+          border-left: 2px solid #7e7e7e;
+          border-right: 2px solid #e0e0e0;
+          border-bottom: 2px solid #e0e0e0;
+        }
+        &[type="radio"], &[type="checkbox"] {
+          margin-right: 4px;
+        }
       }
       textarea {
         width: 80%;

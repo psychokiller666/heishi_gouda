@@ -32,7 +32,8 @@ export const getters = {
 }
 
 export const actions = {
-  async REQ_LIST ({ commit }) {
+  async REQ_LIST ({ state, commit }) {
+    if (state.items.length) return false
     commit('SET_BUTTONLOAD', true)
     await axios.post('list', {
       openid: this.getters['GET_OPENID']
@@ -62,5 +63,15 @@ export const actions = {
       commit('UPDATE_ITEMS', item)
       commit('SET_BUTTONLOAD', false)
     })
+  },
+  async REQ_USERINFO () {
+    const res = await axios.post('showinfo', {
+      openid: this.getters['GET_OPENID']
+    })
+    if (res.data.code === 0) {
+      return res.data
+    } else {
+      return false
+    }
   }
 }

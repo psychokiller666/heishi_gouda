@@ -1,6 +1,7 @@
 import axios from '~/plugins/axios'
 
 export const state = () => ({
+  loading: false,
   cur_page: null,
   list: [],
   total_page: null
@@ -18,20 +19,27 @@ export const mutations = {
         item.paired = 1
       }
     })
+  },
+  SET_LOADING: (state, action) => {
+    state.loading = action
   }
 }
 
 export const actions = {
   async REQ_LIST ({ state, commit }, page) {
-    if (state.cur_page > state.total_page) return false
-
-    const res = await axios.post('belikedlist', {
-      openid: this.getters['GET_OPENID'],
-      page: page,
-      page_size: 20
-    })
-    if (res.data.code === 0) {
-      commit('SET_LIST', res.data)
+    if (state.cur_page > state.total_page) {
+      console.log('dff')
+    } else {
+      commit('SET_LOADING', true)
+      const res = await axios.post('belikedlist', {
+        openid: this.getters['GET_OPENID'],
+        page: page,
+        page_size: 20
+      })
+      if (res.data.code === 0) {
+        commit('SET_LIST', res.data)
+        commit('SET_LOADING', false)
+      }
     }
   },
   async REQ_LIKE ({ commit }, id) {

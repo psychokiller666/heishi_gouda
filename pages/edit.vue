@@ -21,6 +21,11 @@
       <label>姓名：</label><input type="text" v-model:value="userinfo.nickname" placeholder="最多10个字。" />
     </div>
     <div class="win95-input">
+      <label>性别：</label>
+      <span><input name="Fruit" type="radio" v-model="userinfo.gender" value="1" />男</span>
+      <span><input name="Fruit" type="radio" v-model="userinfo.gender" value="2" />女</span>
+    </div>
+    <div class="win95-input">
       <label>微信：</label><input type="text" v-model:value="userinfo.weixin_id" placeholder="微信地址，毕竟还可以不接受。" />
     </div>
     <div class="win95-input">
@@ -51,6 +56,10 @@ export default {
         })
       })
       res.data.data.img_list = temp
+      // 第一次玩
+      if (!res.data.data.nickname) {
+        Toast('想玩勾搭至少上传三张自己的高质量穿搭图，被审核姐姐拒绝了今天就没得玩了，请认真上传')
+      }
       return {
         userinfo: res.data.data
       }
@@ -151,10 +160,17 @@ export default {
         })
         return
       }
+      if (this.userinfo.gender === 0) {
+        Toast({
+          message: '告诉小姐姐你是男的女的',
+          className: 'win95-toast'
+        })
+        return
+      }
+
       this.userinfo.img_list.forEach((item) => {
         this.img.push(item.url)
       })
-      // console.log(this.temp_img_list, this.img)
       Indicator.open('拼命保存呢。')
       axios.post('editinfo', {
         openid: this.$store.getters['GET_OPENID'],
@@ -162,11 +178,12 @@ export default {
         weixin_id: this.userinfo.weixin_id,
         cover: this.userinfo.cover,
         quote: this.userinfo.quote,
+        gender: this.userinfo.gender,
         img: this.img
       }).then(res => {
         Indicator.close()
         if (res.data.code === 0) {
-          MessageBox.confirm('你现在可以去首页，刷刷刷刷刷', '保存好啦。').then(action => {
+          MessageBox.confirm('等着小姐姐审核吧。').then(action => {
             this.$router.push('/')
           })
         } else {

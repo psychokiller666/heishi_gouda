@@ -4,19 +4,19 @@
       <nuxt-link to="/" class="win95-button back">返回</nuxt-link>
     </div>
     <hr class="win95-hr" />
-    <ul class="items" v-infinite-scroll="loadMore">
+    <ul class="items" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading">
       <li class="item" v-for="item in items">
-        <nuxt-link :to="{ name : '/show', params: { id: item.user_id }}" class="userinfo">
+        <nuxt-link :to="{ name: 'show-id', params: { id: item.user_id }}" class="userinfo">
           <div class="avatar" v-lazy:background-image="item.weixin_headimg+`/96`"></div>
           <div class="username">{{ item.nickname }}</div>
         </nuxt-link>
         <button class="win95-button" v-if="item.paired == 0" @!click="postLike(item.user_id)">LIKE</button>
-        <nuxt-link :to="{ name : '/show', params: { id: item.user_id }}" class="win95-button">WECHAT</nuxt-link>
+        <nuxt-link :to="{ name: 'show-id', params: { id: item.user_id }}" class="win95-button">WECHAT</nuxt-link>
       </li>
     </ul>
 
     <div class="win95-prompt page-infinite-loading">
-      <div v-show="!items.length">当叫嚣的鸟群飞过天际，我的血液因等待而感到疼痛。过段时间欣赏你的人将会出现这，just wait。</div>
+      <div v-show="!items.length">只有相互点赞的人回出现在列表里，如果你点赞太多，但是没人回应是时候换换照片了。</div>
     </div>
   </section>
 </template>
@@ -32,6 +32,9 @@ export default {
     },
     pages () {
       return this.$store.state.list.cur_page + 1
+    },
+    loading () {
+      return this.$store.state.list.loading
     }
   },
   methods: {

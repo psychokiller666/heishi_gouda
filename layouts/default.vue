@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="page">
         <div class="win95-header">
-          <div class="title">
+          <div class="title" ref="title">
             <div class="icon"></div>
             公路商店.exe
           </div>
@@ -31,6 +31,9 @@
 
 <script>
 export default {
+  methods: {
+
+  }
 }
 </script>
 
@@ -193,6 +196,9 @@ export default {
     color: #fff;
     font-weight: bold;
     padding-left: 36px;
+    &.check {
+      color: red;
+    }
     .icon {
       position: absolute;
       left: 0;
