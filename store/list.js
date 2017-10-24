@@ -1,9 +1,8 @@
 import axios from '~/plugins/axios'
 
 export const state = () => ({
-  loading: false,
-  ismore: true,
-  cur_page: null,
+  loading: true,
+  cur_page: 1,
   list: [],
   total_page: null
 })
@@ -27,20 +26,28 @@ export const mutations = {
 }
 
 export const actions = {
-  async REQ_LIST ({ state, commit }, page) {
-    if (state.cur_page >= state.total_page) {
+  async REQ_INIT_LIST ({ commit }) {
+    commit('SET_LOADING', true)
+    const res = await axios.post('belikedlist', {
+      openid: this.getters['GET_OPENID'],
+      page: 1,
+      page_size: 20
+    })
+    if (res.data.code === 0) {
+      commit('SET_LIST', res.data)
       commit('SET_LOADING', false)
-    } else {
-      commit('SET_LOADING', true)
-      const res = await axios.post('belikedlist', {
-        openid: this.getters['GET_OPENID'],
-        page: page,
-        page_size: 20
-      })
-      if (res.data.code === 0) {
-        commit('SET_LIST', res.data)
-        commit('SET_LOADING', false)
-      }
+    }
+  },
+  async REQ_LIST ({ state, commit }, page) {
+    commit('SET_LOADING', true)
+    const res = await axios.post('belikedlist', {
+      openid: this.getters['GET_OPENID'],
+      page: page,
+      page_size: 20
+    })
+    if (res.data.code === 0) {
+      commit('SET_LIST', res.data)
+      commit('SET_LOADING', false)
     }
   },
   async REQ_LIKE ({ commit }, id) {
