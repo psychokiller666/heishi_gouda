@@ -7,8 +7,8 @@
       <p v-show="toast" class="toast success">{{ toast ? '状态：登录成功' : '状态：登录失败' }}</p>
       <hr class="win95-hr" />
       <h2>提示：</h2>
-      <p>每周三 24h开放</p>
-      <p>我还没想到更好的功能，有的话，你在黑市后台留言</p>
+      <p>每周三限时开放24小时</p>
+      <!-- <p>我还没想到更好的功能，有的话，你在黑市后台留言</p> -->
     </div>
   </section>
 </template>
@@ -40,8 +40,6 @@ export default {
   },
   methods: {
     wechat_login () {
-      // console.log(this.$route, window.location.href)
-      // console.log(this.apiConfig)
       window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + window.heishiConfig.wechatAppid + '&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_base&state=gouda'
     }
   }
@@ -54,6 +52,9 @@ export default {
     text-align: left;
     img {
       height: 49px;
+    }
+    p {
+      color: red;
     }
     .toast {
       color: red;
