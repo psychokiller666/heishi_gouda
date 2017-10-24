@@ -10,8 +10,8 @@
           <div class="avatar" v-lazy:background-image="item.weixin_headimg+`/96`"></div>
           <div class="username">{{ item.nickname }}</div>
         </nuxt-link>
-        <!-- <button class="win95-button" v-if="item.paired == 0" @!click="postLike(item.user_id)">LIKE</button> -->
-        <button class="win95-button" @!click="postLike(item.user_id)">LIKE</button>
+        <button class="win95-button" v-if="item.paired == 0" @!click="postLike(item.user_id)">LIKE</button>
+        <!-- <button class="win95-button" @!click="postLike(item.user_id)">LIKE</button> -->
         <nuxt-link :to="{ name: 'show-id', params: { id: item.user_id }}" class="win95-button">WECHAT</nuxt-link>
       </li>
     </ul>
