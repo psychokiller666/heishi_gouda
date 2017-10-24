@@ -23,18 +23,12 @@
 <script>
 export default {
   asyncData ({ store }) {
-    return store.dispatch('list/REQ_INIT_LIST')
+    return store.dispatch('list/REQ_LIST')
   },
   middleware: 'auth',
   computed: {
     items () {
       return this.$store.state.list.list
-    },
-    pages () {
-      return this.$store.state.list.cur_page + 1
-    },
-    total_page () {
-      return this.$store.state.list.total_page
     },
     loading () {
       return this.$store.state.list.loading
@@ -42,11 +36,7 @@ export default {
   },
   methods: {
     loadMore () {
-      if (this.pages >= this.total_page) {
-
-      } else {
-        this.$store.dispatch('list/REQ_LIST', this.pages)
-      }
+      this.$store.dispatch('list/REQ_LIST')
     },
     postLike (id) {
       this.$store.dispatch('list/REQ_LIKE', id)
