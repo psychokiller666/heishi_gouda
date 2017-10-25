@@ -1,6 +1,6 @@
 <template>
   <section class="index">
-    <mt-loadmore ref="loadmore" :top-method="loadTop"  v-show="status === 1">
+    <mt-loadmore ref="loadmore" :top-method="loadTop" v-show="status === 1">
       <div class="win95-features">
         <button class="win95-button like" @!click="submitLike" :disabled="buttonLoad">LIKE</button>
         <button class="win95-button shit" @!click="submitShit" :disabled="buttonLoad">SHIT</button>
@@ -27,7 +27,7 @@
         当叫嚣的鸟群飞过天际，我的血液因等待而感到疼痛。过段时间欣赏你的人将会出现这，just wait。
       </div>
     </mt-loadmore>
-    <div class="invite" v-show="status !== 1">
+    <div class="invite" v-else>
       <div class="win95-prompt">
         <h2>提示：</h2>
         <p v-if="status == -1">审核没通过，请重新认真的编辑一次资料。<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/41328b73e08edc2f94eda41185b0e76e.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
