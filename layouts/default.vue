@@ -9,8 +9,8 @@
           </div>
           <div class="menu">
             <nuxt-link to="/edit" class="menu-button">个人中心</nuxt-link>
-            <nuxt-link to="/list" class="menu-button">列表</nuxt-link>
-            <button disabled="disabled" class="menu-button">Chill</button>
+            <nuxt-link to="/list" class="menu-button">喜欢我</nuxt-link>
+            <nuxt-link to="/likelist" class="menu-button">我喜欢</nuxt-link>
             <button disabled="disabled" class="menu-button">Thirsty</button>
             <button disabled="disabled" class="menu-button">Wait</button>
           </div>
