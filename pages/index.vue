@@ -1,6 +1,6 @@
 <template>
   <section class="index">
-    <mt-loadmore ref="loadmore" :top-method="loadTop" v-show="status === 1">
+    <mt-loadmore ref="loadmore" :top-method="loadTop" v-if="status === 1">
       <div class="win95-features">
         <button class="win95-button like" @!click="submitLike" :disabled="buttonLoad">LIKE</button>
         <button class="win95-button shit" @!click="submitShit" :disabled="buttonLoad">SHIT</button>
