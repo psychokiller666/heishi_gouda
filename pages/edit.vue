@@ -22,8 +22,8 @@
     </div>
     <div class="win95-input">
       <label>性别：</label>
-      <span><input name="Fruit" type="radio" v-model="userinfo.gender" value="1" />男</span>
-      <span><input name="Fruit" type="radio" v-model="userinfo.gender" value="2" />女</span>
+      <span><input name="Fruit" style="transform: scale(1.5,1.5);" type="radio" v-model="userinfo.gender" value="1" />男</span>
+      <span><input name="Fruit" style="transform: scale(1.5,1.5);" type="radio" v-model="userinfo.gender" value="2" />女</span>
     </div>
     <div class="win95-input">
       <label>微信：</label><input type="text" v-model:value="userinfo.weixin_id" placeholder="微信地址，毕竟还可以不接受。" />
