@@ -7,7 +7,7 @@
     <ul class="items">
       <li class="item" v-for="item in items">
         <nuxt-link :to="{ name: 'show-id', params: { id: item.id }}" class="userinfo">
-          <div class="avatar" v-lazy:background-image="item.weixin_headimg+`/96`"></div>
+          <div class="avatar" v-lazy:background-image="item.head_img+`/96`"></div>
           <div class="username">{{ item.nickname }}</div>
         </nuxt-link>
         <nuxt-link :to="{ name: 'show-id', params: { id: item.id }}" class="win95-button">查看</nuxt-link>
