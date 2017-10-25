@@ -7,7 +7,7 @@
       </file-upload>
     </div>
     <hr class="win95-hr" />
-    <div class="image_cover" v-lazy:background-image="userinfo.cover+`?x-oss-process=image/resize,h_360`" v-show="userinfo.cover"></div>
+    <div class="image_cover" v-lazy:background-image="userinfo.cover+`?x-oss-process=image/resize,h_500/quality,Q_80`" v-show="userinfo.cover"></div>
     <div class="image_list" v-show="userinfo.img_list.length">
       <div class="list-scroll">
         <div class="list-item" v-for="img in userinfo.img_list">

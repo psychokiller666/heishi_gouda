@@ -15,7 +15,7 @@
             </div>
             <nuxt-link class="win95-button more" :to="{ name: 'show-id', params: { id: item.id } }">更多照片</nuxt-link>
           </div>
-          <div class="cover" v-lazy:background-image="item.cover + `?x-oss-process=image/resize,h_360`"></div>
+          <div class="cover" v-lazy:background-image="item.cover + `?x-oss-process=image/resize,h_500/quality,Q_80`"></div>
           <div class="viewsphotonum">
             <div class="view">{{ item.view }} 看过</div>
             <div class="photonum">{{ item.img_list.length }}</div>
