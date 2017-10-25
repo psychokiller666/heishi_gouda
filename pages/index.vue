@@ -47,7 +47,7 @@ export default {
   data () {
     return {
       isSubmit: false,
-      status: false,
+      status: 1,
       has_liked_someone: null
     }
   },
