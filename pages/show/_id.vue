@@ -7,7 +7,7 @@
     <div class="image_cover"  v-lazy:background-image="user.cover + `?x-oss-process=image/resize,h_360`"></div>
     <div class="image_list">
       <div class="list-scroll">
-        <div class="list-item" v-for="item in user.img_list" v-lazy:background-image.container="item + `?x-oss-process=image/resize,h_100`"></div>
+        <div class="list-item" v-for="item in user.img_list" @!click="previewImage(item)" v-lazy:background-image.container="item + `?x-oss-process=image/resize,h_100`"></div>
       </div>
     </div>
     <div class="win95-input">
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import wx from 'weixin-js-sdk'
 import axios from '~/plugins/axios'
 
 export default {
@@ -53,6 +54,12 @@ export default {
       } else {
         window.history.back()
       }
+    },
+    previewImage (url) {
+      wx.previewImage({
+        current: url,
+        urls: this.user.img_list
+      })
     }
   }
 }
