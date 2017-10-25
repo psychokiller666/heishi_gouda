@@ -15,7 +15,7 @@
     </ul>
 
     <div class="win95-prompt page-infinite-loading">
-      <div v-show="!items.length">只有喜欢你的人会出现在列表里，如果你点赞太多，但是没人回应是时候换换照片了。</div>
+      <div v-show="!items.length">你喜欢过的人都会出现在这里。</div>
     </div>
   </section>
 </template>
