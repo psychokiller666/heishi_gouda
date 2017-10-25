@@ -2,7 +2,7 @@
   <section class="edit">
     <div class="win95-features">
       <nuxt-link to="/" class="win95-button back">返回</nuxt-link>
-      <file-upload class="win95-button upload" ref="upload" accept="image/png,image/gif,image/jpeg,image/webp" :size="upload_config.size" :multiple="true" v-model="files" :post-action="upload_config.url" :data="upload_config.data" @input-file="inputFile">
+      <file-upload class="win95-button upload" ref="upload" accept="image/png,image/gif,image/jpg,image/jpeg,image/webp" :size="upload_config.size" :multiple="true" v-model="files" :post-action="upload_config.url" :data="upload_config.data" @input-file="inputFile">
         上传
       </file-upload>
     </div>
