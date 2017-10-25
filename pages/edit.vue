@@ -73,7 +73,7 @@ export default {
         url: window.heishiConfig.baseUrl + 'upload',
         auto: true,
         max_files: 8,
-        size: 1024 * 1024 * 10,
+        size: 1024 * 1024 * 1024 * 10,
         data: {
           openid: this.$store.getters['GET_OPENID']
         }

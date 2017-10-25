@@ -60,7 +60,7 @@ export const actions = {
       commit('UPDATE_ITEMS', id)
     } else {
       Toast({
-        message: res.data.error_msg,
+        message: res.data.data,
         className: 'win95-toast'
       })
     }
