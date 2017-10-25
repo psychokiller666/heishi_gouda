@@ -54,7 +54,7 @@ export const actions = {
   async REQ_LIKE ({ commit }, id) {
     const res = await axios.post('like', {
       openid: this.getters['GET_OPENID'],
-      id: id
+      to_user_id: id
     })
     if (res.data.code === 0) {
       commit('UPDATE_ITEMS', id)

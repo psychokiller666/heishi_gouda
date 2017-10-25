@@ -47,7 +47,7 @@ export const actions = {
     let item = this.getters['home/GET_FIRST_ITEMS']
     await axios.post('like', {
       openid: this.getters['GET_OPENID'],
-      id: item.id
+      to_user_id: item.id
     }).then(res => {
       commit('UPDATE_ITEMS', item)
       commit('SET_BUTTONLOAD', false)
@@ -58,7 +58,7 @@ export const actions = {
     let item = this.getters['home/GET_FIRST_ITEMS']
     await axios.post('shit', {
       openid: this.getters['GET_OPENID'],
-      id: item.id
+      to_user_id: item.id
     }).then(res => {
       commit('UPDATE_ITEMS', item)
       commit('SET_BUTTONLOAD', false)
