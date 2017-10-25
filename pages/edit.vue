@@ -194,23 +194,26 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 .edit {
-  .upload {
-    input {
-      overflow: hidden;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      z-index: 999;
-      opacity: 0;
-    }
-    &:after {
-      z-index: -999;
+  .win95-features {
+    .upload {
+      input {
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        opacity: 0;
+      }
+      &:after {
+        z-index: -999;
+      }
     }
   }
+
   .image_cover {
     height: 360px;
     background-repeat: no-repeat;
