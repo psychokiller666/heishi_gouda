@@ -1,3 +1,5 @@
+import { Toast } from 'mint-ui'
+
 import axios from '~/plugins/axios'
 
 export const state = () => ({
@@ -50,11 +52,17 @@ export const actions = {
     }
   },
   async REQ_LIKE ({ commit }, id) {
-    await axios.post('like', {
+    const res = await axios.post('like', {
       openid: this.getters['GET_OPENID'],
       id: id
-    }).then(res => {
-      commit('UPDATE_ITEMS', id)
     })
+    if (res.data.code === 0) {
+      commit('UPDATE_ITEMS', id)
+    } else {
+      Toast({
+        message: res.data.error_msg,
+        className: 'win95-toast'
+      })
+    }
   }
 }
