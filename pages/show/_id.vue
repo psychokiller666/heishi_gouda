@@ -13,8 +13,8 @@
     <div class="win95-input">
       <label>姓名：</label><input type="text" :value="user.nickname" disabled placeholder="最多10个字。" />
     </div>
-    <div class="win95-input" v-show="user.weixin_id">
-      <label>微信：</label><input type="text" :value="user.weixin_id" placeholder="微信地址，毕竟还可以不接受。" />
+    <div class="win95-input">
+      <label>微信：</label><input type="text" :value="user.weixin_id" :placeholder="user.weixin_id ? user.weixin_id : 'Ta也<like>你的时候，才可以看到'" />
     </div>
     <div class="win95-input">
       <label>简介：</label><textarea placeholder="最多20个字" disabled rows="5">{{ user.quote }}</textarea>

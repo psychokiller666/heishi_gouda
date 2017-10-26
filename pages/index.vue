@@ -76,14 +76,14 @@ export default {
   },
   methods: {
     submitLike () {
-      if (this.has_liked_someone === 0) {
-        Toast({
-          message: '好了，ta知道你点赞了，你在<列表>里可以查看互相点赞的人',
-          className: 'win95-toast'
-        })
-        this.has_liked_someone = 1
-      }
       if (this.isSubmit) {
+        if (this.has_liked_someone === 0) {
+          Toast({
+            message: '好了，ta知道你点赞了，你在<喜欢我>里可以查看互相点赞的人',
+            className: 'win95-toast'
+          })
+          this.has_liked_someone = 1
+        }
         this.$store.dispatch('home/REQ_LIKE')
       } else {
         MessageBox.confirm('你必须上传照片，填了微信，才可以like或者shit别人').then(action => {
