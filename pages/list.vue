@@ -11,11 +11,9 @@
           <div class="username">{{ item.nickname }}</div>
         </nuxt-link>
         <button class="win95-button" v-if="item.paired == 0" @!click="postLike(item.user_id)">LIKE</button>
-        <!-- <button class="win95-button" @!click="postLike(item.user_id)">LIKE</button> -->
-        <nuxt-link :to="{ name: 'show-id', params: { id: item.user_id }}" class="win95-button">WECHAT</nuxt-link>
+        <nuxt-link :to="{ name: 'show-id', params: { id: item.user_id }}" class="win95-button" v-else>WECHAT</nuxt-link>
       </li>
     </ul>
-
     <div class="win95-prompt page-infinite-loading">
       <div v-show="!items.length">只有喜欢你的人会出现在列表里，如果你点赞太多，但是没人回应是时候换换照片了。</div>
     </div>

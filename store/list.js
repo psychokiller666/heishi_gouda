@@ -58,9 +58,13 @@ export const actions = {
     })
     if (res.data.code === 0) {
       commit('UPDATE_ITEMS', id)
-    } else {
       Toast({
         message: res.data.data,
+        className: 'win95-toast'
+      })
+    } else {
+      Toast({
+        message: res.data.error_msg,
         className: 'win95-toast'
       })
     }

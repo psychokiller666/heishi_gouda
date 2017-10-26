@@ -13,19 +13,23 @@ export default function ({ store, error, route, redirect }) {
     axios.post('js', {
       url: window.location.origin + '/activity/gouda' + route.path
     }).then(res => {
-      wx.config({
-        debug: res.data.data.debug,
-        appId: res.data.data.appId,
-        timestamp: res.data.data.timestamp,
-        nonceStr: res.data.data.nonceStr,
-        signature: res.data.data.signature,
-        jsApiList: res.data.data.jsApiList
-      })
-      wx.ready(function () {
-        wx.hideMenuItems({
-          menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:share:qq', 'menuItem:share:weiboApp', 'menuItem:share:QZone']
+      if (res.data.code === 0) {
+        wx.config({
+          debug: res.data.data.debug,
+          appId: res.data.data.appId,
+          timestamp: res.data.data.timestamp,
+          nonceStr: res.data.data.nonceStr,
+          signature: res.data.data.signature,
+          jsApiList: res.data.data.jsApiList
         })
-      })
+        wx.ready(function () {
+          wx.hideMenuItems({
+            menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline', 'menuItem:share:qq', 'menuItem:share:weiboApp', 'menuItem:share:QZone']
+          })
+        })
+      } else {
+        console.log(res.data.error_msg)
+      }
     })
   }
 }
