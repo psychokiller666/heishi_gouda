@@ -20,10 +20,20 @@
     <div class="win95-input">
       <label>姓名：</label><input type="text" v-model:value="userinfo.nickname" placeholder="最多10个字。" />
     </div>
-    <div class="win95-input">
-      <label>性别：</label>
-      <span><input name="Fruit" style="transform: scale(1.5,1.5);" type="radio" v-model="userinfo.gender" value="1" />男</span>
-      <span><input name="Fruit" style="transform: scale(1.5,1.5);" type="radio" v-model="userinfo.gender" value="2" />女</span>
+    <div class="gender">
+      <div class="gender-label">性别：</div>
+      <div class="gender-input">
+        <label class="radio">
+          <input type="radio" name="gender" v-model="userinfo.gender" value="1" hidden/>
+          <label class="radio-beauty"></label>
+          <span class="radio-name">男</span>
+        </label>
+        <label class="radio">
+          <input type="radio" name="gender" v-model="userinfo.gender" value="2" hidden/>
+          <label class="radio-beauty"></label>
+          <span class="radio-name">女</span>
+        </label>
+      </div>
     </div>
     <div class="win95-input">
       <label>微信：</label><input type="text" v-model:value="userinfo.weixin_id" placeholder="微信地址，毕竟还可以不接受。" />
@@ -213,7 +223,52 @@ export default {
       }
     }
   }
-
+  .gender {
+    display: flex;
+    margin-bottom: 20px;
+    .gender-label {
+      width: 20%;
+      font-size: 16px;
+      line-height: 40px;
+    }
+    .gender-input {
+      line-height: 40px;
+      width: 80%;
+      font-size: 16px;
+      display: flex;
+      .radio {
+        position: relative;
+        width: 15%;
+        margin-right: 10px;
+        .radio-beauty:hover, input[type="radio"]:checked + .radio-beauty {
+          padding: 2px;
+          background-color: #000;
+          background-clip: content-box;
+        }
+        .radio-name {
+          text-align: right;
+          position: absolute;
+          width: 100%;
+          z-index: 999;
+          // position: relative;
+        }
+        .radio-beauty {
+          position: absolute;
+          top: 50%;
+          margin-top: -10px;
+          left:0;
+          width: 20px;
+          height: 20px;
+          box-sizing: border-box;
+          display: inline-block;
+          border: 2px solid #7e7e7e;
+          vertical-align: middle;
+          border-radius: 50%;
+          z-index: -999;
+        }
+      }
+    }
+  }
   .image_cover {
     height: 360px;
     background-repeat: no-repeat;
