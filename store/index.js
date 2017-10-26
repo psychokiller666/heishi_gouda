@@ -1,4 +1,5 @@
 import axios from '~/plugins/axios'
+import { Toast } from 'mint-ui'
 
 export const state = () => ({
   authUser: null
@@ -29,6 +30,10 @@ export const actions = {
       commit('SET_USER', res.data)
       return true
     } else {
+      Toast({
+        message: res.data.error_msg,
+        className: 'win95-toast'
+      })
       return false
     }
   }

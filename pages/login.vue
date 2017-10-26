@@ -3,7 +3,7 @@
     <div class="win95-prompt">
       <h2>登录：</h2>
       <hr class="win95-hr" />
-      <p><button class="win95-button" @!click="wechat_login()">微信登录</button></p>
+      <p><button class="win95-button" @!click="wechat_login()" :disabled="this.$route.query.code">微信登录</button></p>
       <p v-show="toast" class="toast success">{{ toast ? '状态：登录成功' : '状态：登录失败' }}</p>
       <hr class="win95-hr" />
       <h2>提示：</h2>
@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui'
-
 export default {
   data () {
     return {
@@ -29,10 +27,6 @@ export default {
           this.toast = true
           this.$router.push({ path: '/' })
         } else {
-          Toast({
-            message: res.error_msg,
-            className: 'win95-toast'
-          })
           this.toast = false
         }
       })
