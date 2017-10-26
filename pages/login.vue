@@ -30,7 +30,7 @@ export default {
           this.$router.push({ path: '/' })
         } else {
           Toast({
-            message: '登录失败',
+            message: res.error_msg,
             className: 'win95-toast'
           })
           this.toast = false
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     wechat_login () {
-      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + window.heishiConfig.wechatAppid + '&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_base&state=gouda'
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + window.heishiConfig.wechatAppid + '&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_userinfo&state=gouda'
     }
   }
 }
