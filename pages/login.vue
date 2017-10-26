@@ -7,7 +7,7 @@
       <p v-show="toast" class="toast success">{{ toast ? '状态：登录成功' : '状态：登录失败' }}</p>
       <hr class="win95-hr" />
       <h2>提示：</h2>
-      <p>每周三限时开放24小时</p>
+      <p>每次限时开放24小时</p>
       <!-- <p>我还没想到更好的功能，有的话，你在黑市后台留言</p> -->
     </div>
   </section>

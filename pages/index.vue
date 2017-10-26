@@ -23,7 +23,7 @@
           <div class="quote">{{ item.quote }}</div>
         </div>
       </div>
-      <div class="win95-prompt" v-show="!items">
+      <div class="win95-prompt" v-show="!items.length">
         当叫嚣的鸟群飞过天际，我的血液因等待而感到疼痛。过段时间欣赏你的人将会出现这，just wait。
       </div>
     </mt-loadmore>
