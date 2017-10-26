@@ -7,7 +7,7 @@
       </file-upload>
     </div>
     <hr class="win95-hr" />
-    <div class="image_cover" v-lazy:background-image="userinfo.cover+`?x-oss-process=image/resize,h_360`" v-show="userinfo.cover"></div>
+    <div class="image_cover" v-lazy:background-image.container="userinfo.cover+`?x-oss-process=image/resize,h_360`" v-show="userinfo.cover"></div>
     <div class="image_list" v-show="userinfo.img_list.length">
       <div class="list-scroll">
         <div class="list-item" v-for="img in userinfo.img_list">
@@ -223,6 +223,11 @@ export default {
     border-right: 4px solid #dcdcdc;
     border-bottom: 4px solid #dcdcdc;
     margin-bottom: 0.5em;
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
     &:after {
       content: '';
       position: absolute;
