@@ -185,6 +185,11 @@ export default {
     width: auto;
     height: auto;
     padding: 8px;
+    webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
   }
 }
 .win95-header {
