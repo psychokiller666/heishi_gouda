@@ -21,6 +21,10 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.query.token) {
+      this.$store.commit('SET_USER', this.$route.query.token)
+      this.$router.push({ path: '/' })
+    }
     if (this.$route.query.code) {
       this.$store.dispatch('REQ_WECHAT_LOGIN', this.$route.query.code).then(res => {
         if (res) {
