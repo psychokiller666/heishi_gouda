@@ -24,7 +24,6 @@ export default {
   asyncData ({ store }) {
     return store.dispatch('list/REQ_LIST')
   },
-  middleware: 'auth',
   computed: {
     items () {
       return this.$store.state.list.list

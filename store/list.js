@@ -38,7 +38,6 @@ export const actions = {
     if (state.ismore) {
       commit('SET_LOADING', true)
       const res = await axios.post('belikedlist', {
-        openid: this.getters['GET_OPENID'],
         cur_page: state.next_page,
         page_size: 20
       })
@@ -53,7 +52,6 @@ export const actions = {
   },
   async REQ_LIKE ({ commit }, id) {
     const res = await axios.post('like', {
-      openid: this.getters['GET_OPENID'],
       to_user_id: id
     })
     if (res.data.code === 0) {

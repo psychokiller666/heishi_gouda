@@ -34,8 +34,7 @@ export default {
         items: res.data.data
       }
     }
-  },
-  middleware: 'auth'
+  }
 }
 </script>
 <style lang="scss" scoped>

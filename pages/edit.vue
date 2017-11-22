@@ -2,7 +2,7 @@
   <section class="edit">
     <div class="win95-features">
       <nuxt-link to="/" class="win95-button back">返回</nuxt-link>
-      <file-upload class="win95-button upload" ref="upload" accept="image/*" :multiple="true" v-model="files" :post-action="upload_config.url" :data="upload_config.data" @input-file="inputFile">
+      <file-upload class="win95-button upload" ref="upload" accept="image/*" :multiple="true" v-model="files" :post-action="upload_config.url" :headers="upload_config.headers" @input-file="inputFile">
         上传
       </file-upload>
     </div>
@@ -55,9 +55,7 @@ import axios from '~/plugins/axios'
 
 export default {
   async asyncData ({ store, params, app, error }) {
-    const res = await axios.post('showinfo', {
-      openid: store.getters['GET_OPENID']
-    })
+    const res = await axios.post('showinfo')
     if (res.data.code === 0) {
       const temp = []
       res.data.data.img_list.forEach((item) => {
@@ -83,8 +81,8 @@ export default {
         url: window.heishiConfig.baseUrl + 'upload',
         auto: true,
         max_files: 8,
-        data: {
-          openid: this.$store.getters['GET_OPENID']
+        headers: {
+          Authorization: this.$store.getters['GET_AUTH']
         }
       }
     }
@@ -92,7 +90,6 @@ export default {
   components: {
     FileUpload
   },
-  middleware: 'auth',
   methods: {
     inputFile (newFile, oldFile) {
       if (newFile && !oldFile) {
