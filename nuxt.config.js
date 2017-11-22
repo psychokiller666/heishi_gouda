@@ -23,17 +23,9 @@ module.exports = {
     { src: 'mint-ui/lib/style.min.css' }
   ],
   plugins: [
-    // { src: '~/plugins/axios.js', ssr: false },
     { src: '~/plugins/mintui.js', ssr: false }
   ],
-  // modules: [
-  //   '@nuxtjs/axios'
-  // ],
   ssr: false,
-  // axios: {
-  //   baseURL: 'http://api.ontheroadstore.com/gouda/',
-  //   credentials: false
-  // },
   router: {
     base: '/activity/gouda/'
   },

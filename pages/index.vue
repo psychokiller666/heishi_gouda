@@ -32,6 +32,9 @@
         <h2>提示：</h2>
         <p v-if="status == -1">审核没通过，请重新认真的编辑一次资料。<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/41328b73e08edc2f94eda41185b0e76e.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
         <p v-if="status == 0">小姐姐正审核着呢，别着急！<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/be47599c81d6d39ead1b00be127afe07.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
+        <p v-if="status == 3">
+          小姐姐把勾搭关闭了。<br>每次限时开放24小时，下次在玩吧。
+        </p>
       </div>
     </div>
   </section>
@@ -59,7 +62,6 @@ export default {
       return this.$store.state.home.items
     }
   },
-  middleware: 'auth',
   watch: {
     items: function (item) {
       if (!this.items.length) {
@@ -72,6 +74,11 @@ export default {
       this.status = res.data.status
       this.isSubmit = res.data.img_list.length
       this.has_liked_someone = res.data.has_liked_someone
+      this.$store.dispatch('REQ_IS_VAILABLE').then(res => {
+        if (res.data === 1) {
+          this.status = 3
+        }
+      })
     })
   },
   methods: {

@@ -32,7 +32,6 @@ export default {
   },
   async asyncData ({ store, params, app, error }) {
     const res = await axios.post('showotherinfo', {
-      openid: store.getters['GET_OPENID'],
       to_user_id: params.id
     })
     if (res.data.code === 0) {
@@ -46,7 +45,6 @@ export default {
       })
     }
   },
-  middleware: 'auth',
   methods: {
     back () {
       if (window.history.length === 1) {
