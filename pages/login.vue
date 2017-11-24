@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       toast: null,
-      isWechat: window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === 'micromessenger'
+      isWechat: /MicroMessenger/i.test(window.navigator.userAgent.toLowerCase())
     }
   },
   mounted () {
