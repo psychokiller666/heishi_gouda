@@ -1,26 +1,38 @@
 import * as axios from 'axios'
+import { Toast } from 'mint-ui'
 
 var service = axios.create({
   baseURL: window.heishiConfig.baseUrl
 })
 
-service.interceptors.request.use(function (config) {
-  if (config.headers.common.Authorization) {
-    window.$nuxt.$store.commit('SET_USER', config.headers.common.Authorization)
+service.interceptors.request.use(
+  config => {
+    return config
+  },
+  error => {
+    return Promise.reject(error)
   }
-  return config
-}, function (error) {
-  return Promise.reject(error)
-})
+)
 
-service.interceptors.response.use(function (config) {
-  return config
-}, function (error) {
-  if (error.request.status === 401) {
-    window.$nuxt.$router.push('/login')
+service.interceptors.response.use(
+  response => {
+    return response
+  },
+  error => {
+    switch (error.response.status) {
+      case 401:
+        window.$nuxt.$router.push('/login')
+        break
+      default:
+        window.$nuxt.$router.push('/login')
+        Toast({
+          message: 'error:' + error.response.data.message,
+          className: 'win95-toast'
+        })
+        break
+    }
+    return Promise.reject(error)
   }
-  // console.log(error)
-  return Promise.reject(error)
-})
+)
 
 export default service

@@ -3,8 +3,13 @@
     <div class="win95-prompt">
       <h2>登录：</h2>
       <hr class="win95-hr" />
-      <p><button class="win95-button" @!click="wechat_login()" :disabled="this.$route.query.code">微信登录</button></p>
-      <p v-show="toast" class="toast success">{{ toast ? '状态：登录成功' : '状态：登录失败' }}</p>
+      <div class="aaa" v-if="isWechat">
+        <p><button class="win95-button" @!click="wechat_login()" :disabled="this.$route.query.code">微信登录</button></p>
+        <p v-show="toast" class="toast success">{{ toast ? '状态：登录成功' : '状态：登录失败' }}</p>
+      </div >
+      <div class="aaa" v-else>
+          <p class="toast">请返回app登录后，再来使用！</p>
+      </div>
       <hr class="win95-hr" />
       <h2>提示：</h2>
       <p>每次限时开放24小时</p>
@@ -14,10 +19,12 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
-      toast: null
+      toast: null,
+      isWechat: window.navigator.userAgent.toLowerCase().match(/MicroMessenger/i) === 'micromessenger'
     }
   },
   mounted () {
