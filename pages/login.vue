@@ -3,15 +3,13 @@
     <div class="win95-prompt">
       <h2>登录：</h2>
       <hr class="win95-hr" />
-      <div class="aaa" v-if="isWechat">
+      <div class="aaa" v-show="isWechat">
         <p><button class="win95-button" @!click="wechat_login()" :disabled="this.$route.query.code">微信登录</button></p>
         <p v-show="toast" class="toast success">{{ toast ? '状态：登录成功' : '状态：登录失败' }}</p>
+        <hr class="win95-hr" />
       </div >
-      <div class="aaa" v-else>
-          <p class="toast">请返回app登录后，再来使用！</p>
-      </div>
-      <hr class="win95-hr" />
       <h2>提示：</h2>
+      <p v-show="!isWechat">请返回app登录后，再来使用！</p>
       <p>每次限时开放24小时</p>
       <!-- <p>我还没想到更好的功能，有的话，你在黑市后台留言</p> -->
     </div>
