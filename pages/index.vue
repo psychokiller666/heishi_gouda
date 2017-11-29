@@ -33,7 +33,7 @@
         <p v-if="status == -1">审核没通过，请重新认真的编辑一次资料。<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/41328b73e08edc2f94eda41185b0e76e.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
         <p v-if="status == 0">小姐姐正审核着呢，别着急！<br><br><img v-lazy='"http://img8.ontheroadstore.com/gouda/171023/be47599c81d6d39ead1b00be127afe07.jpeg?x-oss-process=image/resize,h_360"' width="100%" /></p>
         <p v-if="status == 3">
-          小姐姐把勾搭关闭了。<br>每次限时开放24小时，下次在玩吧。
+          小姐姐把勾搭关闭了。<br>
         </p>
       </div>
     </div>

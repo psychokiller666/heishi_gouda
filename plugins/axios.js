@@ -15,18 +15,22 @@ service.interceptors.request.use(
 )
 
 service.interceptors.response.use(
-  response => {
-    return response
-  },
+  response => response,
   error => {
     switch (error.response.status) {
       case 401:
-        window.$nuxt.$router.push('/login')
+        window.$nuxt.$store.commit('SET_USER', '')
+        if (window.$nuxt.$route.name === 'login') {
+          window.$nuxt.$router.go('/login')
+        } else {
+          window.$nuxt.$router.push('/login')
+        }
         break
-      default:
-        window.$nuxt.$router.push('/login')
+      case 404:
+      case 500:
+      case 502:
         Toast({
-          message: 'error:' + error.response.data.message,
+          message: 'error: 傻逼后端出错了。' + error.response.status,
           className: 'win95-toast'
         })
         break
