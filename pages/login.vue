@@ -10,7 +10,7 @@
       </div >
       <h2>提示：</h2>
       <p v-show="!isWechat">请返回app登录后，再来使用！</p>
-      <p>每次限时开放24小时</p>
+      <p>本次开放截止：12月1日</p>
       <!-- <p>我还没想到更好的功能，有的话，你在黑市后台留言</p> -->
     </div>
   </section>
@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       toast: null,
-      isWechat: /MicroMessenger/i.test(window.navigator.userAgent.toLowerCase())
+      isWechat: /microMessenger/i.test(window.navigator.userAgent.toLowerCase())
     }
   },
   mounted () {
