@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import { Toast } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 
 var service = axios.create({
   baseURL: window.heishiConfig.baseUrl
@@ -19,9 +19,11 @@ service.interceptors.response.use(
   error => {
     switch (error.response.status) {
       case 401:
-        window.$nuxt.$store.commit('SET_USER', '')
+        // window.$nuxt.$store.commit('SET_USER', '')
         if (window.$nuxt.$route.name === 'login') {
-          window.$nuxt.$router.go('/login')
+          MessageBox.alert(error.response.data.id).then(action => {
+            window.$nuxt.$router.push('/login')
+          })
         } else {
           window.$nuxt.$router.push('/login')
         }
